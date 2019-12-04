@@ -32,7 +32,7 @@
           container-image-prepare:
               namespace: "{{ registry_namespace|default('rhosp' + (target_install_version|openstack_release|string)) }}"
               prefix: "{{ install.registry.prefix|default('openstack-') }}"
-              tag: "{{ install.registry.tag.discover|ternary('AUTODETECT', install.registry.tag ) }}"
+              tag: "{% if install.registry.tag.discover is defined and install.registry.tag.discover %}AUTODETECT{% else %}{{ install.registry.tag }}{% endif %}"
   when: install.registry.skip.puddle
 
 - name: Fail non-osp deployment
@@ -275,20 +275,6 @@
               regexp: '(^\ +)tag: .*'
               replace: "\\1tag: {{ container_env['container-image-prepare']['tag'] }}"
       when: container_env['container-image-prepare']['tag'] != 'AUTODETECT'
-
-    - block:
-        - name: set satellite namespace
-          replace:
-              path: "{{ working_dir }}/containers-prepare-parameter.yaml"
-              regexp: '(^\ +)namespace.*'
-              replace: "\\1namespace: {{ install.registry.mirror }}/{{ registry_namespace }}"
-
-        - name: set satellite prefix
-          replace:
-              path: "{{ working_dir }}/containers-prepare-parameter.yaml"
-              regexp: '(^\ +)name_prefix.*'
-              replace: "\\1name_prefix: {{ install.registry.prefix }}"
-      when: install.cdn|default(False)
 
     - name: Add auth details for ceph registry in containers-prepare-parameter.yaml
       blockinfile:
