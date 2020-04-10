@@ -4,9 +4,9 @@ subscriptions:
         - rhel-7-server-extras-rpms
         - rhel-7-server-rh-common-rpms
     common_8:
-        - rhel-8-for-x86_64-baseos-beta-rpms
-        - rhel-8-for-x86_64-appstream-beta-rpms
-        - rhel-8-for-x86_64-highavailability-beta-rpms
+        - rhel-8-for-x86_64-baseos-htb-rpms
+        - rhel-8-for-x86_64-appstream-htb-rpms
+        - rhel-8-for-x86_64-highavailability-htb-rpms
         - fast-datapath-for-rhel-8-x86_64-rpms
         - ansible-2.8-for-rhel-8-x86_64-rpms
     15:
