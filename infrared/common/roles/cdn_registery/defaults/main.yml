@@ -1,6 +1,7 @@
 subscriptions:
     common_7:
         - rhel-7-server-htb-rpms
+        - rhel-7-server-extras-rpms
         - rhel-7-server-extras-htb-rpms
         - rhel-7-server-rh-common-beta-rpms
         - rhel-7-server-optional-htb-rpms
