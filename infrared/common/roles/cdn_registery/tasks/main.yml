@@ -28,7 +28,7 @@
         dnf module disable -y virt:rhel &&
         dnf module enable -y virt:8.2
       become: true
-      when: "install_version|string == '16.1'"
+      when: "install_version|string in ('16.1', '16.2')"
   # running also if subscriptions are defined to avoid job breakages.
   when: (cdn_args_file != '' and cdn_creds.activationkey is undefined) or (subscriptions is defined and subscriptions|length > 0 )
 
